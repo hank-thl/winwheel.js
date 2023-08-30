@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri = process.env.MONGODB_URI; // 从 MongoDB Atlas 获取的连接字符串
+const uri = await process.env.MONGODB_URI; // 从 MongoDB Atlas 获取的连接字符串
 const client = new MongoClient(uri);
 const database = client.db("aisen");
 const collection = database.collection("award");
