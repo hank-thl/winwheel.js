@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- <script src="./javascript-winwheel-2.8.0/Winwheel.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/dark.css" rel="stylesheet">
+    
+    <script src="../js/jquery.js"></script>
+    <script src="../js/sweetalert2.min.js"></script>
+    <script src="../js/Winwheel.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+    
+    <style>
+        #wrap {
+            width: 300px;
+            margin: auto;
+            margin-top: 200px;
+            /* justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;  */
+        }
+        .form-control {
+            z-index: 1;
+        }
+        #wheel {
+            z-index: 6;
+        }
+        #draw {
+            display: flex;
+            margin: auto;
+            visibility: hidden;
+        }
+        #continueBtn {
+            display: flex;
+            margin: auto;
+            
+            /* display: none; */
+        }
+        #name {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="wheel" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); display: none;">
+        <canvas id="canvas" width="600" height="600" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
+    </div>
+    <div id="wrap">
+        <div class="input-group mb-3">
+            <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+        </div>
+        <button id="continueBtn" class="btn btn-primary">繼續</button>
+        <button id="draw" class="btn btn-primary">開始抽籤</button>
+        <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
+    </div>
+    
+    <script>
+        const color = [];
+        const wheel = new Winwheel({
+            numSegments:6,
+            outerRadius : 170,
+            segments:[
+                {
+                fillStyle:'red',
+                text:'100元當日折扣',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'群組升級券',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'red',
+                text:'300元當日折扣',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'再接再厲',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'red',
+                text:'200元當日折扣',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'免費送房',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+            ],
+            animation:{
+                type:'spinToStop',
+                duration: 5,
+                spins:6,
+                // easing:'power4.easeInOut',
+                callbackFinished: function(segments){
+                    // window.alert(segments.text);
+                    Swal.fire(segments.text);
+                    document.getElementById('wheel').style.display = 'none';
+                    $('#wrap').append(`<h1 style="text-align: center;">${segments.text}</h1>`);
+                    $('#wrap').append(`<p style="color:red; text-align: center;">請截圖至客服</p>`);
+                },
+                'callbackAfter' : 'drawTriangle()'
+            }
+        })
+
+        document.getElementById('draw').addEventListener('click',()=>{
+            document.getElementById('name').disabled = 'disabled';
+            
+            // calculatePrize();
+            // wheel.startAnimation();
+            document.getElementById('draw').style.display = 'none';
+            let phone = document.getElementById('phone').value;
+            let name = document.getElementById('name').value;
+            let data = {
+                'phone': `${phone}`,
+                'name':`${name}`
+            }
+            $.post( "http://127.0.0.1:3000/startWinwheel",data, function(response) {
+                alert( JSON.stringify(response) );
+                    document.getElementById('wheel').style.display = 'block';
+                    
+                    wheel.animation.stopAngle = response.stopAt;
+                    wheel.startAnimation();
+
+                })
+                .fail(function() {
+                    alert( "error" );
+                })
+        })
+        document.getElementById('continueBtn').addEventListener('click',()=>{
+            const phone = document.getElementById('phone').value;
+            const taiwanPhoneRegex = /^(09)\d{8}$/;
+
+            
+            let data = {
+                'phone': phone
+            }
+            if (taiwanPhoneRegex.test(phone)) {
+                $.post( "http://127.0.0.1:3000/phoneCheck",data, function(response) {
+                    // alert( JSON.stringify(response)=='[]');
+                    if(JSON.stringify(response)!=='[]'){
+                        if(response[0].played){
+                            $('#wrap').append(`<p style="color:red; text-align: center;">一天一次，請您明天再來！</p>`);
+                            document.getElementById('continueBtn').style.display = 'none';
+                        }
+                        else{
+    
+                            document.getElementById('draw').style.visibility = 'visible';
+                            document.getElementById('phone').disabled = 'disabled';
+                            document.getElementById('continueBtn').style.display = 'none';
+                            document.getElementById('name').style.display = 'block';
+                            document.getElementById('name').value = response[0].name;
+                            document.getElementById('name').disabled = 'disabled';
+                        }
+                    }
+                    else{
+                        document.getElementById('draw').style.visibility = 'visible';
+                        document.getElementById('phone').disabled = 'disabled';
+                        document.getElementById('continueBtn').style.display = 'none';
+                        document.getElementById('name').style.display = 'block';
+                    }
+                    
+                    })
+                    .fail(function() {
+                        alert( "error" );
+                    })
+                
+            } else {
+                Swal.fire('手機輸入錯誤!');
+            }
+            
+            
+                
+
+        })
+        drawTriangle();
+        // calculatePrize();
+        
+
+        function drawTriangle()
+        {
+            // Get the canvas context the wheel uses.
+            let ctx = wheel.ctx;
+            // console.log(ctx);
+            ctx.strokeStyle = 'navy';     // Set line colour.
+            ctx.fillStyle   = '#F3D45D';     // Set fill colour.
+            ctx.lineWidth   = 0.5;
+            ctx.beginPath();              // Begin path.
+            ctx.moveTo(270, 105);        // Move to initial position (moved down 100px).
+            ctx.lineTo(330, 105);        // Draw lines to make the shape (moved down 100px).
+            ctx.lineTo(300, 140);        // (moved down 100px).
+            ctx.lineTo(271, 105);        // (moved down 100px).
+            ctx.stroke();                 // Complete the path by stroking (draw lines).
+            ctx.fill();                   // Then fill.
+        }
+    </script>
+</body>
+</html>
