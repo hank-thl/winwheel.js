@@ -111,7 +111,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // 一切就緒，開始接受用戶端連線
 // app.listen(process.env.PORT);
-app.listen(3000);
+// app.listen(3000);
 console.log("Web伺服器就緒，開始接受用戶端連線.");
 console.log("鍵盤「Ctrl + C」可結束伺服器程式.");
 
@@ -163,3 +163,4 @@ app.post("/startWinwheel", async function (request, response) {
 
 });
 
+export default app;
