@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri = process.env.MONGODB_URI; // 从 MongoDB Atlas 获取的连接字符串
+const uri = 'mongodb+srv://hankthl:NUrpWaLENQ0riK30@cluster0.81m6ftv.mongodb.net/?retryWrites=true&w=majority'; // 从 MongoDB Atlas 获取的连接字符串
 const client = new MongoClient(uri);
 const database = client.db("aisen");
 const collection = database.collection("award");
@@ -111,7 +111,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // 一切就緒，開始接受用戶端連線
 // app.listen(process.env.PORT);
-// app.listen(443);
+app.listen(3000);
 console.log("Web伺服器就緒，開始接受用戶端連線.");
 console.log("鍵盤「Ctrl + C」可結束伺服器程式.");
 
