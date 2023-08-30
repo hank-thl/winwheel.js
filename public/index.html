@@ -51,6 +51,7 @@
         body {
             /* position: fixed;  */
             top:0;
+            bottom: 0;
             height: 100vh;
             background-image: url("./image/winwheel1.jpeg");
             background-repeat: no-repeat;
@@ -155,7 +156,7 @@
                 'name':`${name}`
             }
             $.post( "https://winwheel-hank-thl.vercel.app/startWinwheel",data, function(response) {
-                alert( JSON.stringify(response) );
+                // alert( JSON.stringify(response) );
                     document.getElementById('wheel').style.display = 'block';
                     
                     wheel.animation.stopAngle = response.stopAt;
