@@ -17,10 +17,21 @@
     <script src="../js/TweenMax.min.js"></script>
     
     <style>
+        #container {
+            width: 360px;
+            margin: auto;
+            margin-top: 100px;
+            /* padding-top: 200px; */
+            height: 500px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+        }
         #wrap {
             width: 200px;
             margin: auto;
-            margin-top: 200px;
+            padding-top: 30px;
+            /* margin-top: 200px; */
+            /* margin-top: 200px; */
             /* justify-content: center;
             align-content: center;
             flex-wrap: wrap;  */
@@ -65,6 +76,11 @@
             margin: auto;
             width:200px
         }
+        .title {
+            padding-top: 20px;
+            margin: 0 0 10px 0;
+            color: rgb(244, 238, 238);
+        }
     </style>
 </head>
 <body>
@@ -72,16 +88,21 @@
     <div id="wheel" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); display: none;">
         <canvas id="canvas" width="600" height="600" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
     </div>
-    <div id="wrap">
-        <div class="input-group mb-3">
-            <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+    <div id="container">
+        <h1 class="title" style="text-align: center;">Dyson 汽車專業美容</h1>
+        <h1 class="title" style="text-align: center;">秋季競賽</h1>
+        <h1 class="title" style="text-align: center;">轉運好禮大放送</h1>
+        <div id="wrap">
+            <div class="input-group mb-3">
+                <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+            </div>
+            <button id="continueBtn" class="btn btn-primary">繼續</button>
+            <button id="draw" class="btn btn-primary">開始抽籤</button>
+            <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
         </div>
-        <div class="input-group mb-3">
-            <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
-        </div>
-        <button id="continueBtn" class="btn btn-primary">繼續</button>
-        <button id="draw" class="btn btn-primary">開始抽籤</button>
-        <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
     </div>
     
     <script>
