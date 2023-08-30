@@ -135,7 +135,7 @@
                 'phone': `${phone}`,
                 'name':`${name}`
             }
-            $.post( "http://127.0.0.1:3000/startWinwheel",data, function(response) {
+            $.post( "https://winwheel-hank-thl.vercel.app/startWinwheel",data, function(response) {
                 alert( JSON.stringify(response) );
                     document.getElementById('wheel').style.display = 'block';
                     
@@ -156,7 +156,7 @@
                 'phone': phone
             }
             if (taiwanPhoneRegex.test(phone)) {
-                $.post( "http://127.0.0.1:3000/phoneCheck",data, function(response) {
+                $.post( "https://winwheel-hank-thl.vercel.app/phoneCheck",data, function(response) {
                     // alert( JSON.stringify(response)=='[]');
                     if(JSON.stringify(response)!=='[]'){
                         if(response[0].played){
