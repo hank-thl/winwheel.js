@@ -130,25 +130,25 @@ app.post("/phoneCheck", async function (request, response) {
 });
 app.post("/startWinwheel", async function (request, response) {
 	let phone =	request.body.phone
-	let name =	request.body.phone
+	let name =	request.body.name
 
 	let randomNumber = Math.random();
 	let stopAt;
 	let award;
-	if (randomNumber < 0.9) {
-		// 90%
+	if (randomNumber < 0.55) {
+		// 55%
 		stopAt = (1 + Math.floor((Math.random() * 58)));
 		award = '100元當日折扣';
-	} else if (randomNumber < 0.98) {
-		// 8%
+	} else if (randomNumber < 0.95) {
+		// 40%
 		stopAt = (181 + Math.floor((Math.random() * 58)));
 		award = '再接再厲';
-	} else if (randomNumber < 0.995) {
-		// 1.5%
+	} else if (randomNumber < 0.98) {
+		// 3%
 		stopAt = (241 + Math.floor((Math.random() * 58)));
 		award = '200元當日折扣';
 	} else {
-		// 0.5%
+		// 2%
 		stopAt = (121 + Math.floor((Math.random() * 58)));
 		award = '300元當日折扣';
 	}
