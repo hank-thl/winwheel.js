@@ -235,8 +235,8 @@
                     const formattedDate = `${year}/${month}/${day}`;
                     Swal.fire(segments.text);
                     document.getElementById('wheel').style.display = 'none';
-                    $('#wrap').append(`<h4 style="text-align: center;">${segments.text}</h4>`);
-                    $('#wrap').append(`<p style="color:red; text-align: center;">抽獎日期 ${formattedDate} 請截圖至客服</p>`);
+                    $('#container').append(`<h4 style="text-align: center;">${segments.text}</h4>`);
+                    $('#container').append(`<p style="color:red; text-align: center;">抽獎日期 ${formattedDate} 請截圖至客服</p>`);
                 },
                 'callbackAfter' : 'drawTriangle()'
             }
