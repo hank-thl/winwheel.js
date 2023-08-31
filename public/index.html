@@ -17,10 +17,25 @@
     <script src="../js/TweenMax.min.js"></script>
     
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .banner {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("./image/winwheel1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding-top: 100px;
+            
+        }
         #container {
             width: 360px;
             margin: auto;
-            margin-top: 100px;
+            /* margin-top: 100px; */
             /* padding-top: 200px; */
             height: 500px;
             background-color: rgba(0, 0, 0, 0.4);
@@ -60,7 +75,7 @@
             height:0px;
         }
         body {
-            /* position: fixed;  */
+            /* position: fixed; 
             top:0;
             bottom: 0;
             height: 100vh;
@@ -69,7 +84,7 @@
             background-size: cover;
             /* background-position: center; */
 
-            margin: 0;
+            /* margin: 0; */ 
         }
         .form-control{
             display: flex;
@@ -88,20 +103,23 @@
     <div id="wheel" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); display: none;">
         <canvas id="canvas" width="600" height="600" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
     </div>
-    <div id="container">
-        <h2 class="title" style="text-align: center;">Dyson 汽車專業美容</h2>
-        <h2 class="title" style="text-align: center;">秋季競賽</h2>
-        <h2 class="title" style="text-align: center;">轉運好禮大放送</h2>
-        <div id="wrap">
-            <div class="input-group mb-3">
-                <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+    <div class="banner">
+        
+        <div id="container">
+            <h2 class="title" style="text-align: center;">Dyson 汽車專業美容</h2>
+            <h2 class="title" style="text-align: center;">秋季競賽</h2>
+            <h2 class="title" style="text-align: center;">轉運好禮大放送</h2>
+            <div id="wrap">
+                <div class="input-group mb-3">
+                    <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+                </div>
+                <button id="continueBtn" class="btn btn-primary">繼續</button>
+                <button id="draw" class="btn btn-primary">開始抽籤</button>
+                <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
             </div>
-            <div class="input-group mb-3">
-                <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
-            </div>
-            <button id="continueBtn" class="btn btn-primary">繼續</button>
-            <button id="draw" class="btn btn-primary">開始抽籤</button>
-            <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
         </div>
     </div>
     

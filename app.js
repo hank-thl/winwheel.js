@@ -82,13 +82,13 @@ try {
 }
 }
 
-setInterval(()=>{
-	const now = new Date();
-	const hour = now.getHours()
-	if(hour == 0){
-		updateDocument('',false);
-	}
-},60000)
+// setInterval(()=>{
+// 	const now = new Date();
+// 	const hour = now.getHours()
+// 	if(hour == 0){
+// 		updateDocument('',false);
+// 	}
+// },60000)
 // updateDocument('',false);
 // connect();
 // insertDocument('0921005634','john','100元當日折扣',true);
