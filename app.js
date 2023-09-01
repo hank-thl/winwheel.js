@@ -5,19 +5,9 @@ const client = new MongoClient(uri);
 const database = client.db("aisen");
 const collection = database.collection("award");
 function getCurrentDateTime() {
-    const now = new Date();
+    const now = new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false});
     
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const day = String(now.getDate()).padStart(2, '0');
-    
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    
-    const currentDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    
-    return currentDateTime;
+    return now;
   }
 async function connect() {
   try {
