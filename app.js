@@ -71,7 +71,7 @@ async function closeConnection() {
 async function findDocuments(phone) {
 try {
 	await connect();
-	const cursor = collection.find(phone?{ phone:`${phone}` }:"");
+	const cursor = collection.find(phone?{ phone:`${phone}` }:{});
 	const documents = await cursor.toArray();
 	console.log("Found documents:", documents);
 	return await documents;
