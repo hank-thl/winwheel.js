@@ -71,6 +71,38 @@ try {
 	closeConnection();
 }
 }
+async function aggregateDocuments() {
+    try {
+        await connect(); // 连接到数据库
+
+        const pipeline = [
+            {
+                $group: {
+                    _id: "$phone",
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { count: -1 }
+            }
+        ];
+
+        const cursor = collection.aggregate(pipeline); // 执行聚合操作
+
+        const result = await cursor.toArray(); // 将结果转换为数组
+
+        console.log("Aggregated documents:", result);
+        return result;
+    } catch (error) {
+        console.error("Error aggregating documents", error);
+    } finally {
+        closeConnection(); // 关闭数据库连接
+    }
+}
+
+
+
+
 
 // setInterval(()=>{
 // 	const now = new Date();
@@ -109,13 +141,14 @@ console.log("鍵盤「Ctrl + C」可結束伺服器程式.");
 // ---------------
 
 app.get("/find", async function (request, response) {
-	
-
- 
-	
 	let result = await findDocuments();
 
 	response.send(result);
+});
+app.get("/count", async function (request, response) {
+	const aggregationResult = await aggregateDocuments();
+
+	response.send(aggregationResult);
 });
 app.post("/phoneCheck", async function (request, response) {
 	let phone =	request.body.phone
