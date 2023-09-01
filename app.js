@@ -71,7 +71,7 @@ async function closeConnection() {
 async function findDocuments(phone) {
 try {
 	await connect();
-	const cursor = collection.find({ phone:`${phone}` });
+	const cursor = collection.find(phone?{ phone:`${phone}` }:"");
 	const documents = await cursor.toArray();
 	console.log("Found documents:", documents);
 	return await documents;
@@ -118,7 +118,15 @@ console.log("鍵盤「Ctrl + C」可結束伺服器程式.");
 
 // ---------------
 
+app.get("/find", async function (request, response) {
+	
 
+ 
+	
+	let result = await findDocuments();
+
+	response.send(result);
+});
 app.post("/phoneCheck", async function (request, response) {
 	let phone =	request.body.phone
 
