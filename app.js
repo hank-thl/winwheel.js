@@ -5,7 +5,7 @@ const client = new MongoClient(uri);
 const database = client.db("aisen");
 const collection = database.collection("award");
 function getCurrentDateTime() {
-    const now = new Date().toLocaleString('en-US', {timeZone: 'Asia/Taipei',hour12: false});
+    const now = new Date();
     
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
