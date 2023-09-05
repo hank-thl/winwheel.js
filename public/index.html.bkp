@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyson 汽車專業美容 秋季競賽 轉運好禮大放送</title>
+    
+    <!-- <script src="./javascript-winwheel-2.8.0/Winwheel.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/dark.css" rel="stylesheet">
+    
+    <script src="../js/jquery.js"></script>
+    <script src="../js/sweetalert2.min.js"></script>
+    <script src="../js/Winwheel.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+    
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .banner {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("./image/winwheel1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding-top: 30px;
+            
+        }
+        #container {
+            width: 360px;
+            margin: auto;
+            /* margin-top: 100px; */
+            /* padding-top: 200px; */
+            height: 680px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+        }
+        #wrap {
+            width: 200px;
+            margin: auto;
+            /* padding-top: 30px; */
+            /* margin-top: 200px; */
+            /* margin-top: 200px; */
+            /* justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;  */
+        }
+        .form-control {
+            z-index: 1;
+        }
+        #wheel {
+            z-index: 6;
+        }
+        #draw {
+            display: flex;
+            margin: auto;
+            visibility: hidden;
+        }
+        #continueBtn {
+            display: flex;
+            margin: auto;
+            
+            /* display: none; */
+        }
+        #name {
+            display: none;
+        }
+        html {
+            height:0px;
+        }
+        body {
+            /* position: fixed; 
+            top:0;
+            bottom: 0;
+            height: 100vh;
+            background-image: url("./image/winwheel1.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* background-position: center; */
+
+            /* margin: 0; */ 
+        }
+        .form-control{
+            display: flex;
+            margin: auto;
+            width:200px
+        }
+        .title {
+            padding-top: 15px;
+            margin: 0 0 5px 0;
+            color: rgb(244, 238, 238);
+        }
+        .item{
+            margin: 12px auto!important;
+        }
+        .item p{
+            color: rgb(244, 238, 238);
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .banner {
+            width: 100vw;
+            height: 100vh;
+            background-image: url("./image/winwheelMobile.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            padding-top: 30px;
+            
+        }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="wheel" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); display: none;">
+        <canvas id="canvas" width="600" height="600" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
+    </div>
+    <div class="banner">
+        
+        <div id="container">
+            <h3 class="title" style="text-align: center;">中部汽車美容</h3>
+            <h3 class="title" style="text-align: center;">中秋轉運大輪盤活動開跑囉</h3>
+            <div class="item">
+                <p class="text" style="text-align: center;">❤️活動期間❤️9/1～9/30日止❤️</p>
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">一位會員每天可以使用👉一次</p>
+                <p class="text" style="text-align: center;">當天轉完 有效期限 兩天</p>
+                <p class="text" style="text-align: center;">每天晚上24:00 更新</p>
+                
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">輸入電話抽獎 中獎後 👉 會審核</p>
+                <p class="text" style="text-align: center;">需與會員電話相符</p>
+                <p class="text" style="text-align: center;">若不同（一律視同無效）</p>
+                
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">🌟另外 九月消費 前十名🌟</p>
+                <p class="text" style="text-align: center;">加碼💰加碼💰加碼💰</p>
+                
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">贈送 中部 知名熱銷  蛋黃酥禮盒15顆 一盒</p>
+                
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">需排隊2-3小時 才能搶到的 中部名產</p>
+                
+            </div>
+            <div class="item">
+                <p class="text" style="text-align: center;">XX坊👉人氣蛋黃酥👈</p>
+                
+            </div>
+            <div id="wrap">
+                <div class="input-group mb-3">
+                    <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+                </div>
+                <button id="continueBtn" class="btn btn-primary">繼續</button>
+                <button id="draw" class="btn btn-primary">開始抽籤</button>
+                <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const color = [];
+        const wheel = new Winwheel({
+            numSegments:6,
+            outerRadius : 170,
+            segments:[
+                {
+                fillStyle:'red',
+                text:'100元折價券',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'群組升級券',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'red',
+                text:'300元折價券',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'銘謝惠顧',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'red',
+                text:'200元折價券',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+                {
+                fillStyle:'black',
+                text:'免費送房 3H',
+                strokeStyle:'white',
+                textFillStyle:'white'
+                },
+            ],
+            animation:{
+                type:'spinToStop',
+                duration: 5,
+                spins:6,
+                // easing:'power4.easeInOut',
+                callbackFinished: function(segments){
+                    // window.alert(segments.text);
+                    // 获取当前日期
+                    const currentDate = new Date();
+
+                    // 获取年、月、日
+                    const year = currentDate.getFullYear();
+                    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
+                    const day = String(currentDate.getDate()).padStart(2, '0');
+
+                    // 格式化为 "YYYY/MM/DD" 形式
+                    const formattedDate = `${year}/${month}/${day}`;
+                    Swal.fire(segments.text);
+                    document.getElementById('wheel').style.display = 'none';
+                    $('#container').append(`<h4 style="text-align: center;">${segments.text}</h4>`);
+                    $('#container').append(`<p style="color:red; text-align: center;">抽獎日期 ${formattedDate} 請截圖至客服</p>`);
+                },
+                'callbackAfter' : 'drawTriangle()'
+            }
+        })
+
+        document.getElementById('draw').addEventListener('click',()=>{
+            document.getElementById('name').disabled = 'disabled';
+            
+            // calculatePrize();
+            // wheel.startAnimation();
+            document.getElementById('draw').style.display = 'none';
+            let phone = document.getElementById('phone').value;
+            let name = document.getElementById('name').value;
+            let data = {
+                'phone': `${phone}`,
+                'name':`${name}`
+            }
+            $.post( "https://winwheel-hank-thl.vercel.app/startWinwheel",data, function(response) {
+                // alert( JSON.stringify(response) );
+                    document.getElementById('wheel').style.display = 'block';
+                    
+                    wheel.animation.stopAngle = response.stopAt;
+                    wheel.startAnimation();
+
+                })
+                .fail(function() {
+                    alert( "error" );
+                })
+        })
+        document.getElementById('continueBtn').addEventListener('click',()=>{
+            const phone = document.getElementById('phone').value;
+            const taiwanPhoneRegex = /^(09)\d{8}$/;
+
+            
+            let data = {
+                'phone': phone
+            }
+            if (taiwanPhoneRegex.test(phone)) {
+                $.post( "https://winwheel-hank-thl.vercel.app/phoneCheck",data, function(response) {
+                    // alert( JSON.stringify(response)=='[]');
+                    if(JSON.stringify(response)!=='[]'){
+                        if(response[0].played){
+                            $('#wrap').append(`<p style="color:red; text-align: center;">一天一次，請您明天再來！</p>`);
+                            document.getElementById('continueBtn').style.display = 'none';
+                        }
+                        else{
+    
+                            document.getElementById('draw').style.visibility = 'visible';
+                            document.getElementById('phone').disabled = 'disabled';
+                            document.getElementById('continueBtn').style.display = 'none';
+                            document.getElementById('name').style.display = 'block';
+                            document.getElementById('name').value = response[0].name;
+                            document.getElementById('name').disabled = 'disabled';
+                        }
+                    }
+                    else{
+                        document.getElementById('draw').style.visibility = 'visible';
+                        document.getElementById('phone').disabled = 'disabled';
+                        document.getElementById('continueBtn').style.display = 'none';
+                        document.getElementById('name').style.display = 'block';
+                    }
+                    
+                    })
+                    .fail(function() {
+                        alert( "error" );
+                    })
+                
+            } else {
+                Swal.fire('手機輸入錯誤!');
+            }
+            
+            
+                
+
+        })
+        drawTriangle();
+        // calculatePrize();
+        
+
+        function drawTriangle()
+        {
+            // Get the canvas context the wheel uses.
+            let ctx = wheel.ctx;
+            // console.log(ctx);
+            ctx.strokeStyle = 'navy';     // Set line colour.
+            ctx.fillStyle   = '#F3D45D';     // Set fill colour.
+            ctx.lineWidth   = 0.5;
+            ctx.beginPath();              // Begin path.
+            ctx.moveTo(270, 105);        // Move to initial position (moved down 100px).
+            ctx.lineTo(330, 105);        // Draw lines to make the shape (moved down 100px).
+            ctx.lineTo(300, 140);        // (moved down 100px).
+            ctx.lineTo(271, 105);        // (moved down 100px).
+            ctx.stroke();                 // Complete the path by stroking (draw lines).
+            ctx.fill();                   // Then fill.
+        }
+    </script>
+</body>
+</html>

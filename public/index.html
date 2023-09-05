@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dyson 汽車專業美容 秋季競賽 轉運好禮大放送</title>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
     <!-- <script src="./javascript-winwheel-2.8.0/Winwheel.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
     
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/dark.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/dark.css" rel="stylesheet">
     
-    <script src="../js/jquery.js"></script>
-    <script src="../js/sweetalert2.min.js"></script>
-    <script src="../js/Winwheel.min.js"></script>
-    <script src="../js/TweenMax.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/Winwheel.min.js"></script>
+    <script src="./js/TweenMax.min.js"></script>
     
     <style>
         *{
@@ -23,16 +25,16 @@
             list-style: none;
         }
         .banner {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-image: url("./image/winwheel1.jpeg");
-            background-repeat: no-repeat;
+            background-repeat: repeat-y;
             background-size: cover;
             background-position: center;
-            padding-top: 30px;
+            padding-top: 70px;
             
         }
-        #container {
+        .content {
             width: 360px;
             margin: auto;
             /* margin-top: 100px; */
@@ -105,75 +107,254 @@
         }
         @media (max-width: 768px) {
             .banner {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background-image: url("./image/winwheelMobile.jpeg");
-            background-repeat: no-repeat;
+            background-repeat: repeat-y;
             background-size: cover;
             background-position: center;
-            padding-top: 30px;
+            padding-top: 70px;
             
         }
+        
+        /* ---------------------- */
         }
     </style>
+    <style>
+        .center-container {
+          display: flex;
+          position: absolute;
+          top: 0;
+          justify-content: left;
+          align-items: center;
+          width: 100%;
+          height: 60px;
+          padding: 20px;
+          background-color: rgb(0, 0, 0,0.3)
+          
+        }
+        .marquee-container {
+          width: 100%;    
+          overflow: hidden;
+          background-color: #fff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          height: 30px;
+          border: 1px solid #333;
+        }
+        .custom-box {
+          position: relative;
+          width: 10%;
+          max-width: 80px;
+          height: 30px;
+          background-color: #EC008C;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          margin-right: 26px;
+          text-align: center;
+          display: flex; /* 使用弹性盒子布局 */
+          justify-content: center; /* 水平居中 */
+          align-items: center; /* 垂直居中 */
+          font-size: 20px;
+          border: 2px solid #EC008C;
+          border-radius: 10px;
+          transition: all .3s;
+          cursor: pointer;
+          filter: contrast(1.1);
+        }
+    
+        .custom-box span {
+          color: #fff;
+          display: inline-block; /* 让 span 可以垂直居中 */
+        }
+    
+        .custom-box:active {
+          filter: contrast(0.9);
+        }
+    
+        .custom-box::before,
+        .custom-box::after {
+          content: "";
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          right: -10px;
+          bottom: -10px;
+          border: 2px solid #EC008C;
+          transition: all .5s;
+          animation: clippath 3s infinite linear;
+          border-radius: 10px;
+          z-index: -1; /* 将线条置于背景后面 */
+         }
+    
+        .custom-box::after {
+          animation: clippath 3s infinite -1.5s linear;
+         }
+    
+        @keyframes  clippath {
+          0%, 100% {
+            clip-path: inset(0 0 98% 0);
+          }
+          25% {
+            clip-path: inset(0 98% 0 0);
+          }
+          50% {
+            clip-path: inset(98% 0 0 0);
+          }
+          75% {
+            clip-path: inset(0 0 0 98%);
+          }
+        }
+    
+        .marquee {
+          white-space: nowrap;
+          animation: marquee 20s linear infinite;
+        }
+        span a.nav-link {
+          text-decoration: none;
+          color: #000;
+        }
+        a:hover {
+          color: #EC008C;
+        }
+        @keyframes  marquee {
+          0%   { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+    
+       
+        @media (max-width: 576px) {
+               
+        }
+    
+        
+        @media (max-width: 767px) {
+          .custom-box span {
+            font-size: 10px;
+        }
+       }
+    
+        @media (min-width: 768px) and (max-width: 991px) {
+     
+     
+       }
+      
+      </style>
 </head>
 <body>
 
     <div id="wheel" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); display: none;">
         <canvas id="canvas" width="600" height="600" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></canvas>
     </div>
+    
     <div class="banner">
-        
-        <div id="container">
-            <h3 class="title" style="text-align: center;">中部汽車美容</h3>
-            <h3 class="title" style="text-align: center;">中秋轉運大輪盤活動開跑囉</h3>
-            <div class="item">
-                <p class="text" style="text-align: center;">❤️活動期間❤️9/1～9/30日止❤️</p>
+        <div class="center-container">
+            <div class="custom-box">
+              <span>公告</span>
             </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">一位會員每天可以使用👉一次</p>
-                <p class="text" style="text-align: center;">當天轉完 有效期限 兩天</p>
-                <p class="text" style="text-align: center;">每天晚上24:00 更新</p>
-                
-            </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">輸入電話抽獎 中獎後 👉 會審核</p>
-                <p class="text" style="text-align: center;">需與會員電話相符</p>
-                <p class="text" style="text-align: center;">若不同（一律視同無效）</p>
-                
-            </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">🌟另外 九月消費 前十名🌟</p>
-                <p class="text" style="text-align: center;">加碼💰加碼💰加碼💰</p>
-                
-            </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">贈送 中部 知名熱銷  蛋黃酥禮盒15顆 一盒</p>
-                
-            </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">需排隊2-3小時 才能搶到的 中部名產</p>
-                
-            </div>
-            <div class="item">
-                <p class="text" style="text-align: center;">XX坊👉人氣蛋黃酥👈</p>
-                
-            </div>
-            <div id="wrap">
-                <div class="input-group mb-3">
-                    <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+            <div class="marquee-container">
+              <div class="row">
+                <div class="col-10 ">
+                <div class="marquee">
+                    <!-- <span>恭喜 0903***726 抽中 群組升級券！&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>恭喜 0963***300 抽中 200元折價券！</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>恭喜 0982***125 抽中 免費送房 3H！</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>恭喜 0987***811 抽中 300元折價券！</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>恭喜 0901***704 抽中 200元折價券！</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span> -->
                 </div>
-                <div class="input-group mb-3">
-                    <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col mb-3">
+                    <div class="content">
+                        <h3 class="title" style="text-align: center;">中部汽車美容</h3>
+                        <h3 class="title" style="text-align: center;">中秋轉運大輪盤活動開跑囉</h3>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">❤️活動期間❤️9/1～9/30日止❤️</p>
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">一位會員每天可以使用👉一次</p>
+                            <p class="text" style="text-align: center;">當天轉完 有效期限 兩天</p>
+                            <p class="text" style="text-align: center;">每天晚上24:00 更新</p>
+                            
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">輸入電話抽獎 中獎後 👉 會審核</p>
+                            <p class="text" style="text-align: center;">需與會員電話相符</p>
+                            <p class="text" style="text-align: center;">若不同（一律視同無效）</p>
+                            
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">🌟另外 九月消費 前十名🌟</p>
+                            <p class="text" style="text-align: center;">加碼💰加碼💰加碼💰</p>
+                            
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">贈送 中部 知名熱銷  蛋黃酥禮盒15顆 一盒</p>
+                            
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">需排隊2-3小時 才能搶到的 中部名產</p>
+                            
+                        </div>
+                        <div class="item">
+                            <p class="text" style="text-align: center;">XX坊👉人氣蛋黃酥👈</p>
+                            
+                        </div>
+                        <div id="wrap">
+                            <div class="input-group mb-3">
+                                <input type="text" style="text-align: center;" id="phone" class="form-control" placeholder="請輸入手機號碼" aria-label="Recipient's phone" aria-describedby="basic-addon2">   
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" style="text-align: center;" id="name" class="form-control" placeholder="請輸入名字" aria-label="Recipient's name" aria-describedby="basic-addon2">    
+                            </div>
+                            <button id="continueBtn" class="btn btn-primary">繼續</button>
+                            <button id="draw" class="btn btn-primary">開始抽籤</button>
+                            
+                        </div>
+                    </div>
                 </div>
-                <button id="continueBtn" class="btn btn-primary">繼續</button>
-                <button id="draw" class="btn btn-primary">開始抽籤</button>
-                <!-- <button id="draw" class="btn btn-primary">開始抽籤</button> -->
+                
+                
             </div>
         </div>
+        
     </div>
     
     <script>
+        function replaceCharacters(inputString, startIndex, endIndex, replacement) {
+            // 将字符串分成三部分：前面的部分，要替换的部分，后面的部分
+            const before = inputString.slice(0, startIndex);
+            const toReplace = inputString.slice(startIndex, endIndex + 1); // 包括 endIndex
+            const after = inputString.slice(endIndex + 1);
+
+            // 构建新字符串，将要替换的部分替换为 replacement
+            const newString = before + replacement + after;
+
+            return newString;
+        }
+        $(()=>{
+
+            let awards = ['100元折價券','群組升級券','300元折價券','200元折價券','免費送房 3H']
+            
+            for(i=0;i<5;i++){
+                const randomNumberPart = Math.floor(Math.random() * 100000000);
+                const number = `09${String(randomNumberPart).padStart(8, '0')}`
+                
+                $('.marquee').append(`<span>恭喜 ${replaceCharacters(number,4,6,'***')} 抽中 ${awards[Math.floor(Math.random() * 5)]}！&nbsp;&nbsp;&nbsp;</span>`)
+            }
+
+        })
+
         const color = [];
         const wheel = new Winwheel({
             numSegments:6,
@@ -224,15 +405,11 @@
                 callbackFinished: function(segments){
                     // window.alert(segments.text);
                     // 获取当前日期
-                    const currentDate = new Date();
+                    const currentDate = new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false});
 
-                    // 获取年、月、日
-                    const year = currentDate.getFullYear();
-                    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需要加1
-                    const day = String(currentDate.getDate()).padStart(2, '0');
 
                     // 格式化为 "YYYY/MM/DD" 形式
-                    const formattedDate = `${year}/${month}/${day}`;
+                    const formattedDate = currentDate.substr(0,10);
                     Swal.fire(segments.text);
                     document.getElementById('wheel').style.display = 'none';
                     $('#container').append(`<h4 style="text-align: center;">${segments.text}</h4>`);
@@ -269,7 +446,7 @@
         document.getElementById('continueBtn').addEventListener('click',()=>{
             const phone = document.getElementById('phone').value;
             const taiwanPhoneRegex = /^(09)\d{8}$/;
-
+            
             
             let data = {
                 'phone': phone
@@ -279,17 +456,26 @@
                     // alert( JSON.stringify(response)=='[]');
                     if(JSON.stringify(response)!=='[]'){
                         if(response[0].played){
-                            $('#wrap').append(`<p style="color:red; text-align: center;">一天一次，請您明天再來！</p>`);
                             document.getElementById('continueBtn').style.display = 'none';
+                            $('#wrap').append(`<p style="color:red; text-align: center;">一天一次，請您明天再來！</p>`);
+                            let awardList = '';
+                            response.forEach((value)=>{
+                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
+                            })
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3>${awardList}</div></div>`)
                         }
                         else{
-    
                             document.getElementById('draw').style.visibility = 'visible';
                             document.getElementById('phone').disabled = 'disabled';
                             document.getElementById('continueBtn').style.display = 'none';
                             document.getElementById('name').style.display = 'block';
                             document.getElementById('name').value = response[0].name;
                             document.getElementById('name').disabled = 'disabled';
+                            let awardList = '';
+                            response.forEach((value)=>{
+                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
+                            })
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3>${awardList}</div></div>`)
                         }
                     }
                     else{
