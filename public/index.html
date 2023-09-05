@@ -462,7 +462,7 @@
                             response.forEach((value)=>{
                                 awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;">限兩天內使用</h4>${awardList}</div></div>`)
                         }
                         else{
                             document.getElementById('draw').style.visibility = 'visible';
@@ -475,7 +475,7 @@
                             response.forEach((value)=>{
                                 awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;">限兩天內使用</h4>${awardList}</div></div>`)
                         }
                     }
                     else{
