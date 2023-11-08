@@ -1,103 +1,113 @@
+import { is } from "express/lib/request";
+
 const { MongoClient } = require("mongodb");
 
 const uri = process.env.MONGODB_URI; // 从 MongoDB Atlas 获取的连接字符串
 const client = new MongoClient(uri);
 const database = client.db("aisen");
 const collection = database.collection("award");
+// 獲取現在時間
 function getCurrentDateTime() {
-    const now = new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false});
-    
-    return now;
-  }
-async function connect() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB Atlas");
-  } catch (error) {
-    console.error("Error connecting to MongoDB Atlas", error);
-  }
+	const now = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei', hour12: false });
+
+	return now;
 }
-async function insertDocument(phone,name,award,played) {
+
+// 連接資料庫
+async function connect() {
+	try {
+		await client.connect();
+		console.log("Connected to MongoDB Atlas");
+	} catch (error) {
+		console.error("Error connecting to MongoDB Atlas", error);
+	}
+}
+// 插入資料
+async function insertDocument(phone, name, point, played) {
 	try {
 		await connect();
-	  	const result = await collection.insertOne(
-		{
-			phone: phone,
-			name: name,
-			award: award,
-			played: played,
-			create_at: getCurrentDateTime()
-		});
-	  console.log("Document inserted:", result.insertedId);
+		const result = await collection.insertOne(
+			{
+				phone: phone,
+				name: name,
+				point: point,
+				played: played,
+				create_at: getCurrentDateTime()
+			});
+		console.log("Document inserted:", result.insertedId);
 	} catch (error) {
-	  console.error("Error inserting document", error);
-	} finally{
+		console.error("Error inserting document", error);
+	} finally {
 		closeConnection();
 	}
-  }
-  async function updateDocument(phone,played) {
+}
+// 更新資料
+async function updateDocument(phone, played, point) {
 	await connect();
 
-	const filter = phone?{phone:`${phone}`}:{ played: true }; // Specify the filter for the document you want to update
-	const update = { $set: { played: played } }; // Specify the update operation
-	
+	const filter = phone ? { phone: `${phone}` } : { played: true }; // Specify the filter for the document you want to update
+	const update = { $set: { played: played, point: point } }; // Specify the update operation
+
 	try {
-	  const result = await collection.updateMany(filter, update);
-	  console.log("Document updated:", result.modifiedCount);
+		const result = await collection.updateMany(filter, update);
+		console.log("Document updated:", result.modifiedCount);
 	} catch (error) {
-	  console.error("Error updating document", error);
-	} finally{
+		console.error("Error updating document", error);
+	} finally {
 		closeConnection();
 	}
-  }
+}
+// 關閉資料庫連線
 async function closeConnection() {
 	try {
-	  await client.close();
-	  console.log("Connection closed");
+		await client.close();
+		console.log("Connection closed");
 	} catch (error) {
-	  console.error("Error closing connection", error);
+		console.error("Error closing connection", error);
 	}
-  }
+}
+// 查詢資料
 async function findDocuments(phone) {
-try {
-	await connect();
-	const cursor = collection.find(phone?{ phone:`${phone}` }:{});
-	const documents = await cursor.toArray();
-	console.log("Found documents:", documents);
-	return await documents;
-} catch (error) {
-	console.error("Error finding documents", error);
-}finally{
-	closeConnection();
+	try {
+		await connect();
+		const cursor = collection.find(phone ? { phone: `${phone}` } : {});
+		const documents = await cursor.toArray();
+		console.log("Found documents:", documents);
+		return await documents;
+	} catch (error) {
+		console.error("Error finding documents", error);
+	} finally {
+		closeConnection();
+	}
 }
-}
+// 聚合資料
 async function aggregateDocuments() {
-    try {
-        await connect(); // 连接到数据库
+	try {
+		await connect(); // 连接到数据库
 
-        const pipeline = [
-            {
-                $group: {
-                    _id: "$phone",
-                    count: { $sum: 1 }
-                }
-            },
-            {
-                $sort: { count: -1 }
-            }
-        ];
+		const pipeline = [
+			{
+				$group: {
+					_id: "$phone",
+					count: { $sum: 1 }
+				}
+			},
+			{
+				$sort: { count: -1 }
+			}
+		];
 
-        const cursor = collection.aggregate(pipeline); // 执行聚合操作
+		const cursor = collection.aggregate(pipeline); // 执行聚合操作
 
-        const result = await cursor.toArray(); // 将结果转换为数组
+		const result = await cursor.toArray(); // 将结果转换为数组
 
-        console.log("Aggregated documents:", result);
-        return result;
-    } catch (error) {
-        console.error("Error aggregating documents", error);
-    } finally {
-        closeConnection(); // 关闭数据库连接
-    }
+		console.log("Aggregated documents:", result);
+		return result;
+	} catch (error) {
+		console.error("Error aggregating documents", error);
+	} finally {
+		closeConnection(); // 关闭数据库连接
+	}
 }
 
 
@@ -145,23 +155,26 @@ app.get("/find", async function (request, response) {
 
 	response.send(result);
 });
+
 app.get("/count", async function (request, response) {
 	const aggregationResult = await aggregateDocuments();
 
 	response.send(aggregationResult);
 });
-app.post("/phoneCheck", async function (request, response) {
-	let phone =	request.body.phone
 
- 
-	
+app.post("/phoneCheck", async function (request, response) {
+	let phone = request.body.phone
+
+
+
 	let result = await findDocuments(phone);
 
 	response.send(result);
 });
+
 app.post("/startWinwheel", async function (request, response) {
-	let phone =	request.body.phone
-	let name =	request.body.name
+	let phone = request.body.phone
+	let name = request.body.name
 
 	let randomNumber = Math.random();
 	let stopAt;
@@ -192,13 +205,18 @@ app.post("/startWinwheel", async function (request, response) {
 		stopAt = (1 + Math.floor((Math.random() * 58)));
 		award = '100元折價券';
 	}
-	
-	let result = {
-		stopAt : stopAt
-	};
 
-	await insertDocument(phone,name,award,true);
-	await updateDocument(phone,true);
+	let result = {
+		stopAt: stopAt
+	};
+	let isPlayed = await findDocuments(phone);	
+	if (isPlayed.length > 0) {
+		point = award + isPlayed[0].point;
+		await updateDocument(phone, true);
+	} else {
+		await insertDocument(phone, name, point, false);
+	}
+	
 	response.send(result);
 
 });
