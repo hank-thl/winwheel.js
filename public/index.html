@@ -345,7 +345,7 @@
         }
         $(()=>{
 
-            let awards = ['1點','2點','3點','4點','點']
+            let awards = ['1點','2點','3點','4點','5點']
             
             for(i=0;i<5;i++){
                 const randomNumberPart = Math.floor(Math.random() * 100000000);
@@ -414,7 +414,7 @@
                     Swal.fire(segments.text);
                     document.getElementById('wheel').style.display = 'none';
                     $('#container').append(`<h4 style="text-align: center;">${segments.text}</h4>`);
-                    $('#container').append(`<p style="color:red; text-align: center;">抽獎日期 ${formattedDate} 請截圖至客服</p>`);
+                    // $('#container').append(`<p style="color:red; text-align: center;">抽獎日期 ${formattedDate} 請截圖至客服</p>`);
                 },
                 'callbackAfter' : 'drawTriangle()'
             }
@@ -460,10 +460,12 @@
                             document.getElementById('continueBtn').style.display = 'none';
                             $('#wrap').append(`<p style="color:red; text-align: center;">一天一次，請您明天再來！</p>`);
                             let awardList = '';
+                            let totalPoint = 0;
                             response.forEach((value)=>{
-                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
+                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award}點 ${value.create_at}</p></div>`;
+                                totalPoint += value.point;
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">限兩天內使用</h4>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
                         }
                         else{
                             document.getElementById('draw').style.visibility = 'visible';
@@ -473,10 +475,14 @@
                             document.getElementById('name').value = response[0].name;
                             document.getElementById('name').disabled = 'disabled';
                             let awardList = '';
+                            let totalPoint = 0;
                             response.forEach((value)=>{
-                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award} ${value.create_at}</p></div>`
+                                awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award}點 ${value.create_at}</p></div>`
+                                totalPoint += value.point;
+
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">限兩天內使用</h4>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
+
                         }
                     }
                     else{
