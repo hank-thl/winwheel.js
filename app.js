@@ -179,32 +179,40 @@ app.post("/startWinwheel", async function (request, response) {
 	let randomNumber = Math.random();
 	let stopAt;
 	let award;
-	// if (randomNumber < 0.55) {
-	// 	// 55%
-	// 	stopAt = (1 + Math.floor((Math.random() * 58)));
-	// 	award = '100元折價券';
-	// } else if (randomNumber < 0.95) {
-	// 	// 40%
-	// 	stopAt = (181 + Math.floor((Math.random() * 58)));
-	// 	award = '銘謝惠顧';
-	// } else if (randomNumber < 0.98) {
-	// 	// 3%
-	// 	stopAt = (241 + Math.floor((Math.random() * 58)));
-	// 	award = '200元折價券';
-	// } else {
-	// 	// 2%
-	// 	stopAt = (121 + Math.floor((Math.random() * 58)));
-	// 	award = '300元折價券';
-	// }
-	if (randomNumber < 0.9) {
-		// 90%
-		stopAt = (181 + Math.floor((Math.random() * 58)));
-		award = '銘謝惠顧';
-	} else {
-		// 10%
+	if (randomNumber < 0.45) {
+		// 45%
 		stopAt = (1 + Math.floor((Math.random() * 58)));
 		award = '100元折價券';
+	} else if (randomNumber < 0.85) {
+		// 40%
+		stopAt = (181 + Math.floor((Math.random() * 58)));
+		award = '銘謝惠顧';
+	} else if (randomNumber < 0.95) {
+		// 10%
+		stopAt = (241 + Math.floor((Math.random() * 58)));
+		award = '200元折價券';
+	} else if (randomNumber < 0.97) {
+		// 2%
+		stopAt = (241 + Math.floor((Math.random() * 58)));
+		award = '200元折價券';
+	}else if (randomNumber < 0.99) {
+		// 2%
+		stopAt = (241 + Math.floor((Math.random() * 58)));
+		award = '200元折價券';
+	}else {
+		// 1%
+		stopAt = (121 + Math.floor((Math.random() * 58)));
+		award = '300元折價券';
 	}
+	// if (randomNumber < 0.9) {
+	// 	// 90%
+	// 	stopAt = (181 + Math.floor((Math.random() * 58)));
+	// 	award = '銘謝惠顧';
+	// } else {
+	// 	// 10%
+	// 	stopAt = (1 + Math.floor((Math.random() * 58)));
+	// 	award = '100元折價券';
+	// }
 
 	let result = {
 		stopAt: stopAt
