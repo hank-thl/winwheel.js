@@ -463,7 +463,7 @@
                             let totalPoint = 0;
                             response.forEach((value)=>{
                                 awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award}點 ${value.create_at}</p></div>`;
-                                totalPoint += value.point;
+                                totalPoint += value.award;
                             })
                             $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
                         }
@@ -478,7 +478,7 @@
                             let totalPoint = 0;
                             response.forEach((value)=>{
                                 awardList +=`<div class="item"><p class="text" style="text-align: center;">${value.award}點 ${value.create_at}</p></div>`
-                                totalPoint += value.point;
+                                totalPoint += value.award;
 
                             })
                             $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
