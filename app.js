@@ -220,8 +220,8 @@ app.post("/startWinwheel", async function (request, response) {
 	// 	point = award + isPlayed[0].point;
 	// } else {
 	// }
+	await insertDocument(phone, name, award,  false);
 	await updateDocument(phone, true);
-	await insertDocument(phone, name,  false);
 	
 	response.send(result);
 
