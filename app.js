@@ -1,5 +1,3 @@
-import { is } from "express/lib/request";
-
 const { MongoClient } = require("mongodb");
 
 const uri = process.env.MONGODB_URI; // 从 MongoDB Atlas 获取的连接字符串
@@ -23,14 +21,14 @@ async function connect() {
 	}
 }
 // 插入資料
-async function insertDocument(phone, name, point, played) {
+async function insertDocument(phone, name, award, played) {
 	try {
 		await connect();
 		const result = await collection.insertOne(
 			{
 				phone: phone,
 				name: name,
-				point: point,
+				award: award,
 				played: played,
 				create_at: getCurrentDateTime()
 			});
@@ -42,11 +40,11 @@ async function insertDocument(phone, name, point, played) {
 	}
 }
 // 更新資料
-async function updateDocument(phone, played, point) {
+async function updateDocument(phone, played) {
 	await connect();
 
 	const filter = phone ? { phone: `${phone}` } : { played: true }; // Specify the filter for the document you want to update
-	const update = { $set: { played: played, point: point } }; // Specify the update operation
+	const update = { $set: { played: played} }; // Specify the update operation
 
 	try {
 		const result = await collection.updateMany(filter, update);
@@ -182,27 +180,27 @@ app.post("/startWinwheel", async function (request, response) {
 	if (randomNumber < 0.45) {
 		// 45%
 		stopAt = (1 + Math.floor((Math.random() * 58)));
-		award = '100元折價券';
+		award = 1;
 	} else if (randomNumber < 0.85) {
 		// 40%
-		stopAt = (181 + Math.floor((Math.random() * 58)));
-		award = '銘謝惠顧';
+		stopAt = (61 + Math.floor((Math.random() * 58)));
+		award = 2;
 	} else if (randomNumber < 0.95) {
 		// 10%
-		stopAt = (241 + Math.floor((Math.random() * 58)));
-		award = '200元折價券';
+		stopAt = (121 + Math.floor((Math.random() * 58)));
+		award = 3;
 	} else if (randomNumber < 0.97) {
 		// 2%
-		stopAt = (241 + Math.floor((Math.random() * 58)));
-		award = '200元折價券';
+		stopAt = (181 + Math.floor((Math.random() * 58)));
+		award = 4;
 	}else if (randomNumber < 0.99) {
 		// 2%
 		stopAt = (241 + Math.floor((Math.random() * 58)));
-		award = '200元折價券';
+		award = 5;
 	}else {
 		// 1%
-		stopAt = (121 + Math.floor((Math.random() * 58)));
-		award = '300元折價券';
+		stopAt = (301 + Math.floor((Math.random() * 58)));
+		award = 6;
 	}
 	// if (randomNumber < 0.9) {
 	// 	// 90%
@@ -217,13 +215,13 @@ app.post("/startWinwheel", async function (request, response) {
 	let result = {
 		stopAt: stopAt
 	};
-	let isPlayed = await findDocuments(phone);	
-	if (isPlayed.length > 0) {
-		point = award + isPlayed[0].point;
-		await updateDocument(phone, true);
-	} else {
-		await insertDocument(phone, name, point, false);
-	}
+	// let isPlayed = await findDocuments(phone);	
+	// if (isPlayed.length > 0) {
+	// 	point = award + isPlayed[0].point;
+	// } else {
+	// }
+	await updateDocument(phone, true);
+	await insertDocument(phone, name,  false);
 	
 	response.send(result);
 
