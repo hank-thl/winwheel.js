@@ -303,7 +303,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col mb-3">
+                <div class="col-12 mb-3">
                     <div class="content">
                         <h3 class="title" style="text-align: center;">✨歡慶8288八大行業資訊交流網✨</h3>
                         <h3 class="title" style="text-align: center;">🎉正式開始服務🎉永久免費刊登</h3>
@@ -536,7 +536,7 @@
                                 awardList += `<div class="item"><p class="text" style="text-align: center;">${value.award}點 ${value.create_at}</p></div>`;
                                 totalPoint += value.award;
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col-12 mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
                         }
                         else {
                             document.getElementById('draw').style.visibility = 'visible';
@@ -552,7 +552,7 @@
                                 totalPoint += value.award;
 
                             })
-                            $('.row').append(`<div class="col mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
+                            $('.row').append(`<div class="col-12 mb-3"><div class="content" id="awards"><h3 class="title" style="text-align: center;">中獎紀錄</h3><h4 style="color:red;text-align: center;">累積點數 ${totalPoint}點</h4>${awardList}</div></div>`)
 
                         }
                     }
