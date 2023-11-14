@@ -177,28 +177,28 @@ app.post("/startWinwheel", async function (request, response) {
 	let randomNumber = Math.random();
 	let stopAt;
 	let award;
-	if (randomNumber < 0.45) {
-		// 45%
+	if (randomNumber < 0.30) {
+		// 30%
 		stopAt = (1 + Math.floor((Math.random() * 58)));
 		award = 1;
-	} else if (randomNumber < 0.85) {
-		// 40%
+	} else if (randomNumber < 0.55) {
+		// 25%
 		stopAt = (61 + Math.floor((Math.random() * 58)));
 		award = 2;
-	} else if (randomNumber < 0.95) {
-		// 10%
+	} else if (randomNumber < 0.75) {
+		// 20%
 		stopAt = (121 + Math.floor((Math.random() * 58)));
 		award = 3;
-	} else if (randomNumber < 0.97) {
-		// 2%
+	} else if (randomNumber < 0.90) {
+		// 15%
 		stopAt = (181 + Math.floor((Math.random() * 58)));
 		award = 4;
-	}else if (randomNumber < 0.99) {
-		// 2%
+	}else if (randomNumber < 0.98) {
+		// 8%
 		stopAt = (241 + Math.floor((Math.random() * 58)));
 		award = 5;
 	}else {
-		// 1%
+		// 2%
 		stopAt = (301 + Math.floor((Math.random() * 58)));
 		award = 6;
 	}
